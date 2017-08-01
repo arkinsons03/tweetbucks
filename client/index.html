@@ -4,19 +4,83 @@
     <title>TweetBucks</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
-    <style>
-        .container {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        
-        #results .row {
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">    
+    <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="assets/css/_all-skins.min.css">
+    <link rel="stylesheet" href="assets/css/adjustments.css">
 </head>
-<body>
+<body class="skin-blue">
+    <div class="wrapper" ng-controller="TwitterController">
+        <div id="login-box" class="login-box" ng-hide="connectedTwitter">
+            <div class="login-logo">
+                <a><b>Tweet</b>Bucks</a>
+            </div>
+            <div class="login-box-body">
+                <a ng-click="connectButton()" class="btn btn-block btn-social btn-twitter ">
+                    <i class="fa fa-twitter"></i> Connect with Twitter
+                </a>
+            </div>
+        </div>
+        <div id="ledger" class="ledger-container" ng-show="connectedTwitter">
+            <div class="main-header">
+                <nav class="navbar navbar-static-top">
+                        <div class="navbar-custom-menu">
+                            <ul class="nav navbar-nav">
+                                <li class="user user-menu">
+                                    <a class="">
+                                        <img class="user-image" ng-src="{{ user.avatar }}" class="img-circle">
+                                        <span class="hidden-xs">@{{ user.alias }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="signOut()" id="signOut" type="button" >Log out</a>                                                    
+                                </li>
+                            </ul>
+                        </div>
+                </nav>
+            </div>
+            <div class="content-wrapper">
+                <section class="content-header"><h1>Transactions</h1></section>                
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                            </div>
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Sender</th>
+                                            <th>Receiver</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                        </tr>
+                                        <tr ng-repeat="t in tweets">
+                                            <td>{{t.id}}</td>
+                                            <td>
+                                                <img ng-src="{{t.user.profile_image_url}}" class="img-circle">
+                                                <small>@{{t.user.screen_name}}</small>                                                
+                                            </td>
+                                            <td>{{ extractData(t.text, 'receiver') }}</td>
+                                            <td>{{ extractData(t.text, 'amount') }}</td>
+                                            <td>{{ t.created_at | date : 'shortDate' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div>                    
+                </section>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!--
     <div class="container" ng-controller="TwitterController">
         <h1>TweetBucks</h1>
         <div class="row">
@@ -24,7 +88,7 @@
                 <button ng-click="connectButton()" id="connectButton" type="button" class="btn btn-primary">Connect Twitter</button>
                 <button ng-click="signOut()" id="signOut" type="button" class="btn btn-link" style="display:none;">Sign Out</button>
             </div>
-            <div class="col-xs-6" ng-show="user !== null ">
+            <div class="col-xs-6" ng-show="user != null ">
                <img ng-src="{{ user.avatar }}" class="img-circle">
                <label><small>@{{ user.alias }}</small></label>
             </div>
@@ -50,6 +114,7 @@
             </div>
         </div>
     </div>
+    -->
 
 
     <script src="bower_components/jquery/dist/jquery.js"></script>

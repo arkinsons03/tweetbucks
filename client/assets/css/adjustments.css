@@ -1,0 +1,7 @@
+.container {margin-top: 10px;margin-bottom: 10px;}        
+#results .row {margin-top: 15px;margin-bottom: 15px;}
+.main-header .navbar {margin-left: 0;}
+.skin-blue .wrapper {background-color: #fff;}
+.content-wrapper, .main-footer {margin-left: 0;}
+.content {min-height: 600px;}
+a#signOut {cursor: pointer;}

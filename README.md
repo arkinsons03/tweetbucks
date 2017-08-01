@@ -35,7 +35,7 @@ Run application
 2. Follow https://twitter.com/tbucks_pay
 3. Send money by tweeting
     ```
-        @tbucks_pay send $<amoount> to <receiver_twitter_handle> [optional] #tweetbucks
+        @tbucks_pay send $<amount> to <receiver_twitter_handle> [optional] #tweetbucks
     ```
 
    Example

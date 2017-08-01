@@ -16,6 +16,27 @@
             });
         }
 
+        //extract data from tweet
+        $scope.extractData = function(text, key) {
+            var data = text.split(" ");
+            var filteredData = data.filter(function(entry) { return /\S/.test(entry); }); //remove white spaces
+            if (key === 'amount') {
+                return filteredData[2];
+            } else if (key === 'receiver') {
+                return filteredData[4];
+            }
+        };
+
+        //update authenticated user
+        $scope.$watch('connectedTwitter', function(newVal) {
+            if (newVal == true) {
+                twitterService.getAuthenticatedUser().then(function(twitterUser) {
+                    console.log(twitterUser);
+                    $scope.user  = twitterUser;     
+                });            
+            }
+        });
+
         //using the OAuth authorization result get the latest 20 tweets from twitter for the user
         $scope.refreshTimeline = function() {
             twitterService.getTweets().then(function(data) {
@@ -31,14 +52,10 @@
             twitterService.connectTwitter().then(function() {
                 if (twitterService.isReady()) {
                     //if the authorization is successful, hide the connect button and display the tweets
-                    $('#connectButton').fadeOut(function() {
-                        $('#getTimelineButton, #signOut').fadeIn();
+                    $('#login-box').fadeOut(function() {
+                        $('#ledger').fadeIn();
                         $scope.refreshTimeline();
                         $scope.connectedTwitter = true;
-                    });
-                    
-                    twitterService.getAuthenticatedUser().then(function(twitterUser) {
-                        $scope.user  = twitterUser || null;     
                     });
                     
                 } else {
@@ -51,19 +68,21 @@
         $scope.signOut = function() {
             twitterService.clearCache();
             $scope.tweets.length = 0;
-             $scope.user = null;
-            $('#getTimelineButton, #signOut').fadeOut(function() {
-                $('#connectButton').fadeIn();
+            $scope.user = null;
+
+            $('#ledger').fadeOut(function() {
+                $('#login-box').fadeIn();
                 $scope.$apply(function() {
                     $scope.connectedTwitter = false
-                })
+                });
             });
+
         }
 
         //if the user is a returning user, hide the sign in button and display the tweets
         if (twitterService.isReady()) {
-            $('#connectButton').hide();
-            $('#getTimelineButton, #signOut').show();
+            $('#login-box').hide();
+            $('#ledger').show();
             $scope.connectedTwitter = true;
             $scope.refreshTimeline();
         }
