@@ -1,0 +1,21 @@
+{
+  "name": "tweet-bucks",
+  "version": "0.0.1",
+  "author": {
+    "name": "Sherwin Gaum",
+    "email": "winaum@me.com"
+  },
+  "ignore": [
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~3.2.1",
+    "modernizr": "^3.5.0",
+    "angular": "~1.6.2",
+    "angular-ui-router": "~0.4.2",
+    "angular-sanitize": "~1.6.5",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "^3.3.7",
+    "oauth-js": "oauthio-web#^0.6.1"
+  }
+}

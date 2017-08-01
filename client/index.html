@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="tweetbucks">
+<head>
+    <title>TweetBucks</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <style>
+        .container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        #results .row {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="TwitterController">
+        <h1>TweetBucks</h1>
+        <div class="row">
+            <div class="col-xs-6">
+                <button ng-click="connectButton()" id="connectButton" type="button" class="btn btn-primary">Connect Twitter</button>
+                <button ng-click="signOut()" id="signOut" type="button" class="btn btn-link" style="display:none;">Sign Out</button>
+            </div>
+            <div class="col-xs-6" ng-show="user !== null ">
+               <img ng-src="{{ user.avatar }}" class="img-circle">
+               <label><small>@{{ user.alias }}</small></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Transactions</h3>
+
+            </div>
+            <div class="col-xs-12" id="results">
+                <div class="row" ng-repeat="t in tweets">
+
+                    <div class="col-xs-2 col-sm-1">
+                        <img ng-src="{{t.user.profile_image_url}}" class="img-circle">
+                    </div>
+                    <div class="col-xs-10 col-sm-11">
+                        <small>{{t.user.name}}</small>
+                        <br> <span ng-bind-html="t.text"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/oauth-js/dist/oauth.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/twitter/twitterService.js"></script>
+    <script src="src/twitter/twitterController.js"></script>
+
+</body>
+</html>
