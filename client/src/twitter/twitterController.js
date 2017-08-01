@@ -5,12 +5,16 @@
     angular.module('tweetbucks').controller('TwitterController', function($scope, $q, twitterService) {
         $scope.tweets = []; //tweets
         $scope.user = null;
+        $scope.connectedTwitter = false;
 
         twitterService.initialize();
 
-        twitterService.getAuthenticatedUser().then(function(twitterUser) {
-            $scope.user  = twitterUser || null;     
-        });
+        //init user
+        if (twitterService.isReady()) {
+            twitterService.getAuthenticatedUser().then(function(twitterUser) {
+                $scope.user  = twitterUser || null;     
+            });
+        }
 
         //using the OAuth authorization result get the latest 20 tweets from twitter for the user
         $scope.refreshTimeline = function() {
@@ -32,6 +36,11 @@
                         $scope.refreshTimeline();
                         $scope.connectedTwitter = true;
                     });
+                    
+                    twitterService.getAuthenticatedUser().then(function(twitterUser) {
+                        $scope.user  = twitterUser || null;     
+                    });
+                    
                 } else {
 
                 }
@@ -42,6 +51,7 @@
         $scope.signOut = function() {
             twitterService.clearCache();
             $scope.tweets.length = 0;
+             $scope.user = null;
             $('#getTimelineButton, #signOut').fadeOut(function() {
                 $('#connectButton').fadeIn();
                 $scope.$apply(function() {

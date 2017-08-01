@@ -12,7 +12,7 @@
         var authorizedUser = null;
         
         const twitter_service  = 'https://api.twitter.com/1.1/';
-        const tb_hash_tag = '#tweetbucks'; //constant id/hastag for tweetbucks
+        const tb_hash_tag = '@tbucks_pay'; //constant id/hastag for tweetbucks
 
 
         return {
@@ -27,10 +27,8 @@
                 authorizationResult = OAuth.create("twitter");
             },
             getAuthenticatedUser : function() {
-                var deferred = $q.defer();                    
-                
-                if (authorizedUser !== null) {
-                    
+                var deferred = $q.defer();         
+                if (authorizationResult && authorizedUser === null) {
                     //get twitter authenticated user via OAuth.io
                     //@see http://docs.oauth.io/#using-rest
                     authorizationResult.me().done(function(me) {
@@ -70,6 +68,7 @@
             clearCache: function() {
                 OAuth.clearCache('twitter');
                 authorizationResult = false;
+                authorizedUser = false;
             },
             getTweets: function() {
                 //create a deferred object using Angular's $q service
@@ -78,9 +77,9 @@
                 // when the data is retrieved resolve the deferred object
                 var deferred = $q.defer();
                 var url = twitter_service + 'search/tweets.json?q=' + encodeURIComponent(tb_hash_tag);
+                url += '&count=100';
                 var promise = authorizationResult.get(url).done(function(data) {
                     deferred.resolve(data);
-                    console.log(data);
                 }).fail(function(err) {
                     deferred.reject(err);
                 });
