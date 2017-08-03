@@ -1,0 +1,38 @@
+{
+  "name": "payments",
+  "plural": "payments",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "amount": {
+      "type": "number",
+      "required": true,
+      "dataType": "decimal",
+      "default": 0,
+      "precision": 10,
+      "scale": 2
+    },
+    "expires_on": {
+      "type": "date",
+      "required": true,
+      "default": "$now"            
+    },
+    "limit": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "created_at": {
+      "type": "date",
+      "required": true,
+      "default": "$now"            
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

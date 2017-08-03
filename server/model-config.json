@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -34,5 +35,17 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "users": {
+    "dataSource": "tweetbucks",
+    "public": true
+  },
+  "payments": {
+    "dataSource": "tweetbucks",
+    "public": true
+  },
+  "transactions": {
+    "dataSource": "tweetbucks",
+    "public": true
   }
 }

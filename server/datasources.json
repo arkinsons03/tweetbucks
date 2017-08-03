@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "tweetbucks": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "tweetbucks",
+    "password": "root",
+    "name": "tweetbucks",
+    "connector": "mysql",
+    "user": "root"
   }
 }

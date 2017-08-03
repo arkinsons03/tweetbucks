@@ -1,0 +1,36 @@
+{
+  "name": "users",
+  "plural": "users",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "twitter_handle": {
+      "type": "string",
+      "required": true
+    },
+    "twitter_id": {
+      "type": "number",
+      "required": true
+    },
+    "balance": {
+      "type": "number",
+      "required": true,
+      "dataType": "decimal",
+      "default": 0,
+      "precision": 10,
+      "scale": 2
+    },
+    "created_at": {
+      "type": "date",
+      "required": true,
+      "default": "$now"      
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
