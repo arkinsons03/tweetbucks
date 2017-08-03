@@ -2,6 +2,9 @@
  *  Twitter App Service
  *  Using third-party OAuth.io
  *  @todo since it is for convenience purposes only, revise this not to use OAuth.io and rely on it
+ * 
+ *  @note pivot to second solution, which is to generate link per payment since Account Activity API( beta )
+ *  requires application and approval (@see https://dev.twitter.com/webhooks/account-activity)
  */
 (function() {
     'use strict';
@@ -9,7 +12,7 @@
     angular.module('twitterApp.services', []).factory('twitterService', function($q) {
 
         var authorizationResult = false;
-        var authorizedUser = null;
+        //var authorizedUser = null;
         
         const twitter_service  = 'https://api.twitter.com/1.1/';
         const tb_hash_tag = '@tbucks_pay'; //constant id/hastag for tweetbucks
@@ -28,19 +31,18 @@
             },
             getAuthenticatedUser : function() {
                 var deferred = $q.defer();         
-                if (authorizationResult && authorizedUser === null) {
+                if (authorizationResult) {
                     //get twitter authenticated user via OAuth.io
                     //@see http://docs.oauth.io/#using-rest
                     authorizationResult.me().done(function(me) {
+                       // authorizedUser = me;                         
                         deferred.resolve(me);  
-                        authorizedUser = me;              
+                                    
                     }).fail(function(err) {
                         deferred.reject(err);
                     });
-
-                    return deferred.promise;
                 } else {
-                    deferred.resolve(authorizedUser);  
+                    deferred.reject({'error' : 'twitter not initialized.'});  
                 }
 
                 return deferred.promise;
@@ -68,16 +70,17 @@
             clearCache: function() {
                 OAuth.clearCache('twitter');
                 authorizationResult = false;
-                authorizedUser = false;
+               // authorizedUser = false;
             },
             getTweets: function() {
                 //create a deferred object using Angular's $q service
                 //get all tweets with #tweetbucks hashtag
                 // https://dev.twitter.com/rest/public/search
+                //https://dev.twitter.com/rest/reference/get/search/tweets                
                 // when the data is retrieved resolve the deferred object
                 var deferred = $q.defer();
                 var url = twitter_service + 'search/tweets.json?q=' + encodeURIComponent(tb_hash_tag);
-                url += '&count=100';
+                url += '&count=100&result_type=recent';
                 var promise = authorizationResult.get(url).done(function(data) {
                     deferred.resolve(data);
                 }).fail(function(err) {

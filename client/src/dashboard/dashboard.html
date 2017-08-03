@@ -1,0 +1,51 @@
+<div class="main-header">
+    <nav class="navbar navbar-static-top">
+         <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                    <li>
+                        <a class="btn">
+                            <span class=" text-white"> Balance : ${{user.balance | number : 2}}</span>                        
+                        </a>
+                    </li>
+                    <li class="user user-menu">
+                        <a ng-show="user != null" class="">
+                            <img class="user-image" ng-src="{{ twitterAcount.avatar }}" class="img-circle">
+                            <span class="hidden-xs">@{{ twitterAcount.alias }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="signOut()" id="signOut" class="btn" >Log out</a>                                                    
+                    </li>
+                </ul>
+            </div>
+    </nav>
+</div>
+
+<div class="content-wrapper">
+    <section class="content-header"><h1>Transactions</h1></section>                
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                        <div class="box-header"></div>
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                    <tr ng-repeat="t in transactions">
+                                        <td>{{t.created_at | date : 'shortDate'}}</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>                    
+    </section>
+</div>

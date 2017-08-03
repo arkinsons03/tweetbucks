@@ -9,13 +9,24 @@ exchange money with any of my numerous Twitter followers.
   npm install
 ```
 
-cd  /client
+```
+   cd  /client
+```
 
 ```
   bower install
 ```
 
+```
 cd ...
+```
+
+Run migration script
+Note: default database name `tweetbucks`
+
+```
+    node server/bin/automigrate.js
+```
 
 
 #Run 
@@ -31,9 +42,17 @@ Run application
 #How to Send Money
 ----
 
-1. Create twitter account (make sure your tweets is not protected)
-2. Follow https://twitter.com/tbucks_pay
-3. Send money by tweeting
+1. Create payment link on the app
+2. Tweet it with in the app  or copy-paste it to your tweet
+
+
+
+
+#Future Support 
+---
+
+ 1. Send money by tweeting (via app's twitter account)
+
     ```
         @tbucks_pay send $<amount> to <receiver_twitter_handle> [optional] #tweetbucks
     ```
