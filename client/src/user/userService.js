@@ -9,7 +9,8 @@
                     method: 'GET', 
                     params: {handle : '@handle'},
                     isArray: false
-                }
+                },
+                update: { method:'PUT' }                
             }
         );
     });

@@ -1,0 +1,53 @@
+<header></header>
+<div class="content-wrapper">
+    <section class="content-header"><h4>Payment Links</h4></section>                
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box" ng-init="isFormActivated = false">
+                        <div class="box-body table-responsive">
+                            <div class="row">
+                                <div class="col-xs-16 col-lg-6">
+                                    <button ng-click="isFormActivated = true" class="btn btn-normal btn-success">
+                                        <i class="glyphicon glyphicon-plus"></i> Add New 
+                                    </button>
+                                    <form ng-show="isFormActivated" role="form" name="form" class="css-form" novalidate>                            
+                                        <div class="form-group" ng-class="{ 'has-error': (form.$submitted && form.amount.$invalid) || (form.firstName.$touched && form.amount.$invalid )}">
+                                            <label>Amount</label>
+                                            <input ng-model="amount" name="amount" required="" placeholder="0.00"  type="number" class=" form-control" />
+                                            <span  ng-show="(form.$submitted && form.amount.$invalid) || (form.amount.$touched && form.amount.$invalid)" class="help-block">This field is required.</span>
+                                        </div>     
+                                        
+                                        <button type="reset" ng-click="isFormActivated = false && form.$setPristine() && form.$setUntouched()" class="btn btn-danger btn-sm">Cancel</button>
+                                        <button type="submit" ng-click="form.$valid && create()" class="btn btn-primary btn-sm ">Submit</button>                                    
+                                        
+                                    </form>   
+                                </div>
+                            </div>                            
+                             
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Limit</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr ng-repeat="l in paymentLinks">
+                                        <td>{{l.created_at | date : 'shortDate'}}</td>
+                                        <td>{{l.amount}}</td>
+                                        <td>{{l.limit}}</td>
+                                        <td>
+                                            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?url={{paymentBaseUrl + l.id}}&text=Payment&hashtags=tweetbucks">
+                                                Tweet
+                                            </a>                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>                    
+    </section>
+</div>

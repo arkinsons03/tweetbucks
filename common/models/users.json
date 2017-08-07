@@ -13,7 +13,8 @@
     },
     "twitter_id": {
       "type": "number",
-      "required": true
+      "required": true,
+      "dataType": "bigint"      
     },
     "balance": {
       "type": "number",

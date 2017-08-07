@@ -3,18 +3,20 @@
 <head>
     <title>TweetBucks</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">    
     <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
     <link rel="stylesheet" href="assets/css/_all-skins.min.css">
     <link rel="stylesheet" href="assets/css/adjustments.css">
 </head>
-<body class="skin-blue">
+<body class="skin-blue layout-top-nav">
      <div class="wrapper">
-            <div ui-view="twitter"> </div>
-            <div ui-view="dashboard"> </div>
-            <div ui-view="payment"> </div>
+            <div ui-view="twitter"></div>
+            <div ui-view="dashboard"></div>
+            <div ui-view="payment"></div>
+            <div ui-view="link"></div>
      </div> 
+    
+     
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/oauth-js/dist/oauth.js"></script>
@@ -23,14 +25,37 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"> </script>
     <script src="bower_components/angular-resource/angular-resource.js"> </script>
     <script src="bower_components/LocalStorageAdapter/LocalStorageAdapter.js"></script>
-    <script src="src/app.js"></script>
+    
+    <script src="src/app.js"></script>    
     <script src="src/user/userService.js"></script>
     <script src="src/payment/paymentService.js"></script> 
     <script src="src/dashboard/transactionService.js"></script>
     <script src="src/twitter/twitterService.js"></script>
+    <script src="src/directives/headerDirective.js"></script>
+    
     <script src="src/twitter/twitterController.js"></script>
     <script src="src/dashboard/dashboardController.js"></script>
     <script src="src/payment/paymentController.js"></script>
+    <script src="src/payment/paymentLinkController.js"></script>
 
+    <script>
+        window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+        }(document, "script", "twitter-wjs"));
+
+    </script>    
 </body>
 </html>

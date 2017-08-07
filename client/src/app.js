@@ -5,7 +5,6 @@
 (function() {
     'use strict';
 
-
     var config_data = {
         GENERAL_CONFIG: {
             APP_NAME: "TweetBucks"
@@ -45,7 +44,6 @@
                     controller : 'DashboardController'
                 }
             }
-
         }).state('payment', {
             url : '/payment/:id',
             cache: false,
@@ -55,8 +53,15 @@
                     controller : 'PaymentController'
                 }
             }
-
-
+        }).state('links', {
+            url : '/payment-links',
+            cache: false,
+            views : {
+                'link' : {
+                    templateUrl : _templateBase + '/payment/payment-list.html',
+                    controller : 'PaymentLinkController'
+                }
+            }
         });        
     });
 })();   

@@ -7,6 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
+    "user_id": {
+      "type": "number",
+      "required": true
+    },        
     "name": {
       "type": "string",
       "required": true
@@ -18,15 +22,25 @@
     "amount": {
       "type": "number",
       "required": true,
-      "default": 0
-    },
+      "dataType": "decimal",
+      "default": 0,
+      "precision": 10,
+      "scale": 2      
+    },    
     "created_at": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "$now"   
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "Users",
+      "foreignKey": "user_id"
+    }    
+  },
   "acls": [],
   "methods": {}
 }

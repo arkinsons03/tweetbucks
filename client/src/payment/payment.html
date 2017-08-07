@@ -1,1 +1,24 @@
-<h1>payment</h1>
+<header></header> 
+<div class="content-wrapper">
+    <section class="content-header"><h4>Payment Confirmation</h4></section>                
+    <section class="content">
+        <div class="row-fluid">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        
+                        <div ng-show="error" class="alert alert-danger ">
+                            <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                                This transaction is invalid. <br>
+                                <small>{{error}}</small>
+                        </div>   
+                        <div ng-show="!error" class="alert alert-success ">
+                            <h4><i class="icon fa fa-check"></i> Successful!</h4>
+                                You have just received ${{amount | number : 2}}.
+                        </div>                                                  
+                    </div>
+                </div>
+            </div>
+        </div>                    
+    </section>
+</div>

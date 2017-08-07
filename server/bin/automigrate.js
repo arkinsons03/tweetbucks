@@ -4,9 +4,10 @@ require('events').EventEmitter.prototype._maxListeners = 0;
  * @see 
  */
 var app = require('../server');
-var ds = app.datasources.tweetbucks;
+var ds = app.dataSources.tweetbucks;
 ds.autoupdate('users');
 ds.autoupdate('payments');
-ds.autoupdate('transactions');
+ds.autoupdate('transactions', function() {
+    process.exit()
+});
 
-process.exit()

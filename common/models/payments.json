@@ -7,6 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
+    "user_id": {
+      "type": "number",
+      "required": true
+    },    
     "amount": {
       "type": "number",
       "required": true,
@@ -32,7 +36,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "Users",
+      "foreignKey": "user_id"
+    }     
+  },
   "acls": [],
   "methods": {}
 }

@@ -15,8 +15,8 @@
         //var authorizedUser = null;
         
         const twitter_service  = 'https://api.twitter.com/1.1/';
-        const tb_hash_tag = '@tbucks_pay'; //constant id/hastag for tweetbucks
-
+        //const tb_hash_tag = '#tbucks_pay'; //constant id/hastag for tweetbucks
+        const twitter_handle_mention = '@tbucks_pay'; //default user mention in the tweet
 
         return {
             initialize: function() {
@@ -79,7 +79,7 @@
                 //https://dev.twitter.com/rest/reference/get/search/tweets                
                 // when the data is retrieved resolve the deferred object
                 var deferred = $q.defer();
-                var url = twitter_service + 'search/tweets.json?q=' + encodeURIComponent(tb_hash_tag);
+                var url = twitter_service + 'search/tweets.json?q=' + encodeURIComponent(twitter_handle_mention);
                 url += '&count=100&result_type=recent';
                 var promise = authorizationResult.get(url).done(function(data) {
                     deferred.resolve(data);

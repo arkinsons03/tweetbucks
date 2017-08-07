@@ -22,7 +22,7 @@
 
         //when the user clicks the connect twitter button, the popup authorization window opens
         $scope.connectButton = function() {
-            twitterService.connectTwitter().then(function() {
+            twitterService.connectTwitter().then(() => {
                 if (twitterService.isReady()) {
 
                     twitterService.getAuthenticatedUser().then(function(twitterUser) {
@@ -33,7 +33,6 @@
 
                         //check if user with twitter handle is already exist
                         User.getByHandle({handle:  $scope.twitterUser.alias },function(data) {
-                            console.log(data);
                             deferred.resolve(data); 
                         }, function(err) {
                              deferred.reject(err);
