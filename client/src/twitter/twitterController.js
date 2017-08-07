@@ -46,7 +46,8 @@
                         } else {
                             var user = new User({
                                 'twitter_handle' :  $scope.twitterUser.alias,
-                                'twitter_id' :  $scope.twitterUser.id                  
+                                'twitter_id' :  $scope.twitterUser.id,
+                                'balance': '10000'                  
                             });
                             
                             user.$save(function(savedUser) {
