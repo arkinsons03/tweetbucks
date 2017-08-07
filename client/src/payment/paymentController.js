@@ -17,6 +17,10 @@
 
             $scope.user = LocalStorageAdapter.get('user');
             $scope.twitterAcount = LocalStorageAdapter.get('twitterUser');
+            
+            //temporary solution to avoid duplication
+            //@todo check this via database instead
+            var isConfirmed = (LocalStorageAdapter.get('is_received')) ? true : false;
 
             //get the payment record
             //check if sender and receiver are just the same
@@ -39,7 +43,7 @@
                    User.get({id : data.user_id}, (sender) => {
 
                        //if sender's balance suffecient
-                       if (sender.balance >= data.amount) {
+                       if (sender.balance >= data.amount &&  !isConfirmed) {
                            sender.balance = (sender.balance - data.amount);
                            User.update({id: sender.id}, sender);  
 
@@ -63,10 +67,12 @@
                                 receiverTransaction.type = 'received';
                                 receiverTransaction.$save();
 
+                                LocalStorageAdapter.set('is_received', true)
+
                             }, () => {});         
 
                        } else {
-                           $scope.error = "Insuffecient fund.";                           
+                           $scope.error = "Invalid Transaction.";                           
                        }
                     }, () => { //$resource exception handling
                         $scope.error = "Transaction process failed.";
