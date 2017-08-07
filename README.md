@@ -43,9 +43,10 @@ Run application
 ----
 
 1. Create payment link on the app
+    1.1 Home -> Payments
+    1.2 Add New Fund Transfer / Payment Link
+    
 2. Tweet it with in the app  or copy-paste it to your tweet
-
-
 
 
 #Future Support 

@@ -10,6 +10,7 @@
 
             //is authenticated in twitter?
             if (!twitterService.isReady())  $state.go('twitter');
+            
             $scope.paymentBaseUrl = window.location.protocol  + '//' + window.location.hostname + ':3000/#!/payment/';
             $scope.paymentLinks = {};             
             $scope.twitterAcount = LocalStorageAdapter.get('twitterUser');

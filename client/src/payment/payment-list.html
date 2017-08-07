@@ -30,13 +30,13 @@
                                     <tr>
                                         <th>Date</th>
                                         <th>Amount</th>
-                                        <th>Limit</th>
+                                        <th>Link</th>
                                         <th></th>
                                     </tr>
                                     <tr ng-repeat="l in paymentLinks">
                                         <td>{{l.created_at | date : 'shortDate'}}</td>
                                         <td>{{l.amount}}</td>
-                                        <td>{{l.limit}}</td>
+                                        <td><a href="{{paymentBaseUrl + l.id}}" target="_blank">{{paymentBaseUrl + l.id}} </a></td>
                                         <td>
                                             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?url={{paymentBaseUrl + l.id}}&text=Payment&hashtags=tweetbucks">
                                                 Tweet
